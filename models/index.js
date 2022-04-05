@@ -1,7 +1,7 @@
 const User = require('./User');
-const Project = require('./Project');
+const Pet = require('./Pet');
 
-User.hasMany(Project, {
+User.hasMany(Pets, {
   foreignKey: 'user_id',
   onDelete: 'CASCADE'
 });
@@ -10,4 +10,4 @@ Project.belongsTo(User, {
   foreignKey: 'user_id'
 });
 
-module.exports = { User, Project };
+module.exports = { User, Pet };
