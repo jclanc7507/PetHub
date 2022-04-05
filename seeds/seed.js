@@ -12,7 +12,7 @@ const seedDatabase = async () => {
     returning: true,
   });
 
-  for (const project of projectData) {
+  for (const post of postData) {
     await Pet.create({
       ...pet,
       user_id: users[Math.floor(Math.random() * users.length)].id,
