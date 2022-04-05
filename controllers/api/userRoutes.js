@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 
+// POST api/user/
 router.post('/', async (req, res) => {
   try {
     const userData = await User.create(req.body);
@@ -9,13 +10,14 @@ router.post('/', async (req, res) => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
 
-      res.status(200).json(userData);
+      res.json(userData);
     });
   } catch (err) {
     res.status(400).json(err);
   }
 });
 
+// POST api/user/login
 router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
