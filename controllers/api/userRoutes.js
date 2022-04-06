@@ -1,8 +1,12 @@
 const router = require('express').Router();
 const { User } = require('../../models');
+// multer = npm package that stores incoming data
+const multer = require('multer');
+// initializes multer and stores incoming data inside the 'uploads' folder
+const upload = multer({dest: 'uploads/'});
 
 // POST api/user/
-router.post('/', async (req, res) => {
+router.post('/', upload.single('profilePicture'), async (req, res) => {
   try {
     const userData = await User.create(req.body);
 
@@ -11,6 +15,7 @@ router.post('/', async (req, res) => {
       req.session.logged_in = true;
 
       res.json(userData);
+      //console.log(req.file);
     });
   } catch (err) {
     res.status(400).json(err);
