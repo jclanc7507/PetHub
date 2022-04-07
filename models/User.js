@@ -37,7 +37,8 @@ User.init(
     },
     userImage: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true,
+      defaultValue: ('../public/images/default.png')
     }
   },
   {

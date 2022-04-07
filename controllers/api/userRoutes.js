@@ -1,10 +1,14 @@
 const router = require('express').Router();
 const { User } = require('../../models');
+const withAuth = require('../../utils/auth');
+
+// multer functions
 const multer = require('multer');
+//const { Model } = require('sequelize/types');
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
-    cb(null, './uploads/user-pictures')
+    cb(null, './uploads')
   },
   filename: function(req, file, cb) {
     cb(null, new Date().toISOString() + file.originalname)
@@ -18,7 +22,6 @@ const fileFilter = (req, file, cb) => {
     cb(null, false);
   }
 };
-
 const upload = multer({
   storage: storage, 
   limits: {
@@ -28,7 +31,7 @@ const upload = multer({
 });
 
 // POST api/user/
-router.post('/', upload.single('profilePicture'), async (req, res) => {
+router.post('/', upload.single('image'), withAuth, async (req, res) => {
   try {
     const userData = await User.create(req.body);
 
@@ -37,7 +40,7 @@ router.post('/', upload.single('profilePicture'), async (req, res) => {
       req.session.logged_in = true;
 
       res.json(userData);
-      //console.log(req.file);
+      console.log(req.file);
     });
   } catch (err) {
     res.status(400).json(err);
@@ -69,6 +72,7 @@ router.post('/login', async (req, res) => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
       
+      //res.redirect("/timesheets/")
       res.json({ user: userData, message: 'You are now logged in!' });
     });
 

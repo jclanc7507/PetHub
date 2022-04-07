@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
   "name": "pethub",
-=======
-  "name": "PetHub",
->>>>>>> 045361cca365f5f3f2a5fc50a88a02c9fbff25b9
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
