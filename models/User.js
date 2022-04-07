@@ -35,6 +35,11 @@ User.init(
         len: [8],
       },
     },
+    userImage: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      defaultValue: ('../public/images/default.png')
+    }
   },
   {
     hooks: {

@@ -15,6 +15,15 @@
         <label for="post-desc">Description:</label>
         <textarea class="form-input" id="post-desc" name="post-desc"></textarea>
       </div>
+
+       <!-- upload a profile picture start -->
+      <div class="form-group" action="upload.php" method="POST" enctype="multipart/form-data">
+        <p>Upload profile image(.jpeg or .png)</p>
+        <input type="file" name="file" />
+        <button class="btn btn-primary" type="submit" name="submit-image">Upload</button>
+      </div>
+      <!-- upload a profile picture end --> 
+
       <div class="form-group">
         <button type="submit" class="btn btn-primary">Post-It!</button>
       </div>
