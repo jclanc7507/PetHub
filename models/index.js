@@ -1,14 +1,14 @@
 const User = require('./User');
-const Pet = require('./Pet');
+//const Pet = require('./Pet');
 const Comment = require('./Comment');
 const Post = require('./Post');
 const Vote = require('./Vote');
 
 // associations
-User.hasMany(Pet, {
-  foreignKey: 'user_id',
-  onDelete: 'CASCADE'
-});
+// User.hasMany(Pet, {
+//   foreignKey: 'user_id',
+//   onDelete: 'CASCADE'
+// });
 
 User.hasMany(Post, {
   foreignKey: 'user_id'
@@ -70,4 +70,4 @@ Post.hasMany(Comment, {
   foreignKey: 'post_id'
 });
 
-module.exports = { User, Pet, Comment, Post, Vote };
+module.exports = { User, /*Pet,*/ Comment, Post, Vote };
