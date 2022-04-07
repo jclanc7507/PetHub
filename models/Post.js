@@ -15,6 +15,7 @@ class Post extends Model {
           'id',
           'title',
           'created_at',
+          'postImage',
           [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
         ],
         include: [
@@ -51,6 +52,9 @@ Post.init(
         model: 'user',
         key: 'id'
       }
+    },
+    postImage: {
+      type: DataTypes.STRING
     }
   },
   {
