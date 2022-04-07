@@ -7,6 +7,14 @@ module.exports = {
     // format large numbers with commas
     return parseInt(amount).toLocaleString();
   },
+  format_url: url => {
+    return url
+      .replace('http://', '')
+      .replace('https://', '')
+      .replace('www.', '')
+      .split('/')[0]
+      .split('?')[0];
+  },
   get_emoji: () => {
     const randomNum = Math.random();
 

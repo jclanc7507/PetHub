@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const sequelize = require('../../config/connection');
 const { Post, User, Comment, Vote } = require('../../models');
 const withAuth = require('../../utils/auth');
 const multer = require('multer');
@@ -101,6 +102,21 @@ router.get('/:id', (req, res) => {
     });
 });
 
+// Create a post
+router.post('/', withAuth, (req, res) => {
+  // expects {title: 'Taskmaster goes public!', post_url: 'https://taskmaster.com/press', user_id: 1}
+  Post.create({
+    title: req.body.title,
+    post_url: req.body.post_url,
+    user_id: req.session.user_id
+  })
+    .then(dbPostData => res.json(dbPostData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
 // updates post to add one upvote
 router.put('/upvote', withAuth, (req, res) => {
   // custom static method created in models/Post.js
@@ -137,21 +153,6 @@ router.put('/:id', upload.single('postImage'), withAuth, (req, res) => {
       console.log(err);
       res.status(500).json(err);
     });
-});
-
-// create new post
-router.post('/', upload.single('postImage'), withAuth, async (req, res) => {
-  try {
-    const newPost = await Post.create({
-      ...req.body,
-      user_id: req.session.user_id,
-      postImage: req.file.path
-    });
-
-    res.status(200).json(newPost);
-  } catch (err) {
-    res.status(400).json(err);
-  }
 });
 
 // delete existing post
