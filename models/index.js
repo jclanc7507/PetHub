@@ -10,6 +10,7 @@ const Vote = require('./Vote');
   onDelete: 'CASCADE'
 }); */
 
+
 User.hasMany(Post, {
   foreignKey: 'user_id'
 });
