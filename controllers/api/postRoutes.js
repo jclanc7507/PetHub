@@ -1,32 +1,8 @@
 const router = require('express').Router();
 const { Post, User, Comment, Vote } = require('../../models');
 const withAuth = require('../../utils/auth');
-const multer = require('multer');
 
-const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, './uploads/post-pictures')
-  },
-  filename: function(req, file, cb) {
-    cb(null, new Date().toISOString() + file.originalname)
-  }
-});
 
-const fileFilter = (req, file, cb) => {
-  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
-
-const upload = multer({
-  storage: storage, 
-  limits: {
-    fileSize: 1024 * 1024 * 5
-  },
-  fileFilter: fileFilter
-});
 
 // get all users
 router.get('/', (req, res) => {
@@ -113,12 +89,11 @@ router.put('/upvote', withAuth, (req, res) => {
 });
 
 // update/edit one post
-router.put('/:id', upload.single('postImage'), withAuth, (req, res) => {
+router.put('/:id'), withAuth, (req, res) => {
   Post.update(
     {
       title: req.body.title,
       description: req.body.description,
-      postImage: req.file.path
     },
     {
       where: {
@@ -137,10 +112,10 @@ router.put('/:id', upload.single('postImage'), withAuth, (req, res) => {
       console.log(err);
       res.status(500).json(err);
     });
-});
+};
 
 // create new post
-router.post('/', upload.single('postImage'), withAuth, async (req, res) => {
+router.post('/'), withAuth, async (req, res) => {
   try {
     const newPost = await Post.create({
       ...req.body,
@@ -152,7 +127,7 @@ router.post('/', upload.single('postImage'), withAuth, async (req, res) => {
   } catch (err) {
     res.status(400).json(err);
   }
-});
+};
 
 // delete existing post
 router.delete('/:id', withAuth, async (req, res) => {
