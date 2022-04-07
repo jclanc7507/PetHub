@@ -2,36 +2,8 @@ const router = require('express').Router();
 const { User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-// multer functions
-const multer = require('multer');
-//const { Model } = require('sequelize/types');
-
-const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, './uploads')
-  },
-  filename: function(req, file, cb) {
-    cb(null, new Date().toISOString() + file.originalname)
-  }
-});
-
-const fileFilter = (req, file, cb) => {
-  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-    cb(new Error('message'), true);
-  } else {
-    cb(null, false);
-  }
-};
-const upload = multer({
-  storage: storage, 
-  limits: {
-    fileSize: 1024 * 1024 * 5
-  },
-  fileFilter: fileFilter
-});
-
 // POST api/user/
-router.post('/', upload.single('image'), withAuth, async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
   try {
     const userData = await User.create(req.body);
 
