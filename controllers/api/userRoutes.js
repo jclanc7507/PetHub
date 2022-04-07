@@ -29,7 +29,7 @@ const upload = multer({
 });
 
 // POST api/user/
-router.post('/', upload.single('profilePicture'), async (req, res) => {
+router.post('/', /*upload.single('profilePicture'),*/ async (req, res) => {
   try {
     const userData = await User.create(req.body);
 
