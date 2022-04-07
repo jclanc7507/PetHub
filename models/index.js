@@ -1,5 +1,4 @@
 const User = require('./User');
-const Pet = require('./Pet');
 const Comment = require('./Comment');
 const Post = require('./Post');
 const Vote = require('./Vote');
