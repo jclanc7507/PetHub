@@ -1,7 +1,35 @@
 const router = require('express').Router();
 const { User } = require('../../models');
+const multer = require('multer');
+const { doc } = require('prettier');
 
-router.post('/', async (req, res) => {
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, './uploads/user-pictures')
+  },
+  filename: function(req, file, cb) {
+    cb(null, new Date().toISOString() + file.originalname)
+  }
+});
+
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+    cb(new Error('message'), true);
+  } else {
+    cb(null, false);
+  }
+};
+
+const upload = multer({
+  storage: storage, 
+  limits: {
+    fileSize: 1024 * 1024 * 5
+  },
+  fileFilter: fileFilter
+});
+
+// POST api/user/
+router.post('/', upload.single('profilePicture'), async (req, res) => {
   try {
     const userData = await User.create(req.body);
 
@@ -9,13 +37,15 @@ router.post('/', async (req, res) => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
 
-      res.status(200).json(userData);
+      res.json(userData);
+      //console.log(req.file);
     });
   } catch (err) {
     res.status(400).json(err);
   }
 });
 
+// POST api/user/login
 router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
