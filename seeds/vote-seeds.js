@@ -24,10 +24,6 @@ const votedata = [
     {
         user_id: 6,
         post_id: 5
-    },
-    {
-        user_id: 1,
-        post_id:1
     }
 ];
 
