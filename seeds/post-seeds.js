@@ -1,6 +1,6 @@
 const { Post } = require('../models');
 
-[
+const postdata = [
   {
     title: "Doggie Meet at Park",
     post_url: "https://www.google.com/search?q=Doggie+Park",
