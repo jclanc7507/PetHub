@@ -5,6 +5,7 @@ const Vote = require('./Vote');
 
 // associations
 
+
 User.hasMany(Post, {
   foreignKey: 'user_id'
 });
