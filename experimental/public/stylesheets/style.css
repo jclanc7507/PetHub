@@ -50,7 +50,7 @@ button {
 }
 
 button:hover {
-  background-color: #3486eb;
+  background-color: #4d064d;
 }
 
 .post-list {
@@ -102,7 +102,7 @@ header {
 }
 
 header h1 {
-  font-size: 1em;
+  font-size: 2em;
 }
 
 main {
