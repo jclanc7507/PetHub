@@ -14,7 +14,7 @@
       <label for="post_image">Post Image</label>
       <input type="file" name="post_image" accept="image/*" />
     </div>
-    <button type="submit" class="btn">Create</button>
+    <button type="submit" class="btn">Post it!</button>
   </form>
 </section>
 
@@ -23,7 +23,7 @@
   <h2>Your Posts</h2>
   <ol>
     {{#each posts as |post|}}
-    <li>
+    <li class="card">
       {{> post-info post}}
       <a href="/dashboard/edit/{{post.id}}" class="edit-link">Edit post</a>
     </li>
