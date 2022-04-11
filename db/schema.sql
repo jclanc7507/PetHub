@@ -1,2 +1,2 @@
-DROP DATABASE IF EXISTS pethub_db;
-CREATE DATABASE pethub_db;
+DROP DATABASE IF EXISTS pet_hub_db;
+CREATE DATABASE pet_hub_db;
