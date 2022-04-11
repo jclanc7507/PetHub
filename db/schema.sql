@@ -1,2 +1,0 @@
-DROP DATABASE IF EXISTS pethub_db;
-CREATE DATABASE pethub_db;
