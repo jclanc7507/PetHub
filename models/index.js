@@ -4,10 +4,6 @@ const Post = require('./Post');
 const Vote = require('./Vote');
 
 // associations
-User.hasMany(Pet, {
-  foreignKey: 'user_id',
-  onDelete: 'CASCADE'
-});
 
 User.hasMany(Post, {
   foreignKey: 'user_id'
@@ -69,4 +65,4 @@ Post.hasMany(Comment, {
   foreignKey: 'post_id'
 });
 
-module.exports = { User, Pet, Comment, Post, Vote };
+module.exports = { User, Comment, Post, Vote };
