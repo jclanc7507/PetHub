@@ -198,3 +198,8 @@ footer {
   font-size: 110%;
 }
 
+img {
+  border-style: double;
+  border-width: medium;
+  border-color: blueviolet;
+}
