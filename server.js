@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
+const multer = require('multer');
 
 const app = express();
 const PORT = process.env.PORT || 3002;
@@ -53,7 +54,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 //filepaths for calling pic? multer^^^?
-app.use("/public", express.static(path.join(__dirname, "/public")));
+app.use("/public", express.static(path.join(__dirname, "../../public")));
 
 app.use(require('./controllers/'));
 

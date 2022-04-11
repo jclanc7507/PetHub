@@ -1,3 +1,0 @@
-DROP DATABASE IF EXISTS pet_hub_db;
-
-CREATE DATABASE pet_hub_db;
