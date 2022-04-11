@@ -54,7 +54,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 //filepaths for calling pic? multer^^^?
+<<<<<<< HEAD
 app.use("/public", express.static(path.join(__dirname, "../../public")));
+=======
+app.use("/public", express.static(path.join(__dirname, "/public")));
+>>>>>>> 56c0f19010b32935bcf0752342e853b410215de2
 
 app.use(require('./controllers/'));
 

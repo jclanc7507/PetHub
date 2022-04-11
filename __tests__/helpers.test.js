@@ -1,4 +1,18 @@
+<<<<<<< HEAD
 const {format_date, format_plural} = require('../utils/helpers');
+=======
+const {format_date, format_plural, format_url} = require('../utils/helpers');
+
+test('format_url() returns a simplified url string', () => {
+  const url1 = format_url('http://test.com/page/1');
+  const url2 = format_url('https://www.coolstuff.com/abcdefg/');
+  const url3 = format_url('https://www.google.com?q=hello');
+
+  expect(url1).toBe('test.com');
+  expect(url2).toBe('coolstuff.com');
+  expect(url3).toBe('google.com');
+});
+>>>>>>> 56c0f19010b32935bcf0752342e853b410215de2
 
 test('format_plural() returns a pluralized word', () => {
   const word1 = format_plural('tiger', 1);

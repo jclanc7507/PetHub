@@ -36,10 +36,13 @@ User.init(
       allowNull: false,
       validate: {
         len: [4]
+<<<<<<< HEAD
       },
       userImage: {
         type: DataTypes.STRING,
         allowNull: true
+=======
+>>>>>>> 56c0f19010b32935bcf0752342e853b410215de2
       }
     }
   },
