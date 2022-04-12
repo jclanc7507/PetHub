@@ -122,6 +122,7 @@ router.put('/:id', withAuth, (req, res) => {
       console.log(err);
       res.status(500).json(err);
     });
+    
 });
 
 router.delete('/:id', withAuth, (req, res) => {
@@ -142,6 +143,20 @@ router.delete('/:id', withAuth, (req, res) => {
       console.log(err);
       res.status(500).json(err);
     });
+});
+
+// routes to post static images
+router.get("/static", (req, res) => {
+    res.render("static");
+});
+
+// Route to display dynamic src images
+router.get("/dynamic", (req, res) => {
+  imageList = [];
+  imageList.push({ src: "../../public/images/Bob-flower-horn-fish.png", name: "Bob-flower-horn-fish" });
+  imageList.push({ src: "../../public/images/Boxer-dog.jpg", name: "boxer" });
+  imageList.push({ src: "../../public/images/Charlie-german-shepard.jpg", name: "german-shepard" });
+  res.render("dynamic", { imageList: imageList });
 });
 
 module.exports = router;
