@@ -1,12 +1,12 @@
-<card class="post">
+<article class="post">
   <image rel="post_image" src="/public/images/default.png" alt="dog pic">
   <div class="title">
-    <a href="/post/{{id}}" target="_blank">{{title}}</a>
-   <p>{{post.post_url}}</p>
+    <a href="/post/{{post_url}}" target="_blank">{{title}}</a>
+   <p>{{post_url}}</p>
   </div>
   <div class="meta">
     {{vote_count}} {{format_plural "point" vote_count}} by {{user.username}} on {{format_date created_at}}
     |
     <p>{{comments.length}} {{format_plural "comment" comments.length}}</p>
   </div>
-</card>
+</article>

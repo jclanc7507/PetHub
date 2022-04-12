@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
-const multer = require('multer');
+//const multer = require('multer');
 
 const app = express();
 const PORT = process.env.PORT || 3002;
@@ -11,7 +11,7 @@ const sequelize = require("./config/connection");
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const sess = {
-  secret: 'Super secret secret',
+  secret: 'cookie jar',
   cookie: {},
   resave: false,
   saveUninitialized: true,
@@ -20,24 +20,24 @@ const sess = {
   })
 };
 
-// multer functions and storage
+// // multer functions and storage
 
-const fileStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, './public/images')
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + '--' + file.originalname)
-  }
-});
+// const fileStorage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, './public/images')
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, Date.now() + '--' + file.originalname)
+//   }
+// });
 
-const upload = multer({storage: fileStorage});
+// const upload = multer({storage: fileStorage});
 
-// POST http://localhost:3001/single
-app.post("/single", upload.single("post_image"), (req, res) => {
-  console.log(req.file);
-  res.send('"Single File upload successful"');
-});
+// // POST http://localhost:3001/single
+// app.post("/single", upload.single("post_image"), (req, res) => {
+//   console.log(req.file);
+//   res.send('"Single File upload successful"');
+// });
 
 app.use(session(sess));
 
