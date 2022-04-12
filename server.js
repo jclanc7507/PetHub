@@ -36,7 +36,7 @@ const upload = multer({storage: fileStorage});
 // POST http://localhost:3001/single
 app.post("/single", upload.single("post_image"), (req, res) => {
   console.log(req.file);
-  res.send("Single File upload successful");
+  res.send('"Single File upload successful"');
 });
 
 app.use(session(sess));

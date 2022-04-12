@@ -143,10 +143,15 @@ main {
   line-height: 150%;
 }
 
-.post .title span {
-  font-style: italic;
-  font-size: 90%;
-  color: #7d7d7d;
+.post .title p {
+  border-color: black;
+  background-color: aqua;
+  border-style: solid;
+  border-width: thin;
+  border-radius: 7px;
+  margin: 10px;
+  padding: 10px;
+  font-weight: 700;
 }
 
 .edit-link {
@@ -203,3 +208,15 @@ img {
   border-width: medium;
   border-color: blueviolet;
 }
+
+label {display: grid;}
+
+input#post-title {display: block;}
+
+input#post_url {display: block;}
+
+input[type="file"] {display: block;background-color: white;}
+
+label {font-weight: 600;}
+
+button.btn {background-color: deepskyblue;}
