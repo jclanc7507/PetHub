@@ -229,8 +229,6 @@ input[type="file"] {display: block;background-color: white;}
 
 label {font-weight: 600;}
 
-button.btn {background-color: deepskyblue;}
-
 img {size: 10px;}
 
 .post .title p {
@@ -248,7 +246,6 @@ img {size: 10px;}
   align-content: space-between;
   justify-content: space-around;
   align-items: flex-end;
-  object-fit: none;
   width: 300px;
   height: 300px;
   max-inline-size: fit-content;
@@ -267,9 +264,9 @@ img {size: 10px;}
 
 li.card {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-evenly;
-  align-content: flex-start;
+  align-items: stretch;
+  justify-content: flex-start;
+  align-content: space-between;
 }
