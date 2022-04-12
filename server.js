@@ -20,25 +20,6 @@ const sess = {
   })
 };
 
-// // multer functions and storage
-
-// const fileStorage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, './public/images')
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, Date.now() + '--' + file.originalname)
-//   }
-// });
-
-// const upload = multer({storage: fileStorage});
-
-// // POST http://localhost:3001/single
-// app.post("/single", upload.single("post_image"), (req, res) => {
-//   console.log(req.file);
-//   res.send('"Single File upload successful"');
-// });
-
 app.use(session(sess));
 
 const helpers = require('./utils/helpers');
@@ -48,12 +29,10 @@ const hbs = exphbs.create({ helpers });
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
-
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-//filepaths for calling pic? multer^^^?
+//filepaths for calling pic
 app.use("/public", express.static(path.join(__dirname, "/public")));
 
 app.use(require('./controllers/'));
