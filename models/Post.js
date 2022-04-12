@@ -50,6 +50,11 @@ Post.init(
       type: DataTypes.STRING,
       allowNull: false
     },
+    post_image: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      default: ('../public/images/default.png')
+    },
     user_id: {
       type: DataTypes.INTEGER,
       references: {
