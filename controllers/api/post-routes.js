@@ -2,9 +2,9 @@ const router = require('express').Router();
 const sequelize = require('../../config/connection');
 const { Post, User, Comment, Vote } = require('../../models');
 const withAuth = require('../../utils/auth');
+const fileUpload = require('express-fileupload');
 const multer = require('multer');
 
-// multer functions
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, './public/images')
@@ -13,6 +13,7 @@ const fileStorage = multer.diskStorage({
     cb(null, Date.now() + '--' + file.originalname)
   }
 });
+
 const upload = multer({storage: fileStorage});
 
 // get all users
@@ -21,9 +22,9 @@ router.get('/', (req, res) => {
   Post.findAll({
     attributes: [
       'id',
-      'post_url',
-      'post_image',
       'title',
+      'post_url',
+      'post_image',          
       'created_at',
       [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
     ],
@@ -57,9 +58,9 @@ router.get('/:id', (req, res) => {
     },
     attributes: [
       'id',
-      'post_url',
-      'post_image',
       'title',
+      'post_url',
+      'post_image',          
       'created_at',
       [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
     ],
@@ -91,12 +92,16 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.post('/', upload.single("image"), withAuth, (req, res) => {
-  // expects {title: 'Taskmaster goes public!', post_url: 'https://taskmaster.com/press', user_id: 1}
+router.post("/", upload.single("post_image"), async (req, res) => {
+  
+  const { filename, path } = req.file
+  await uploadImage(req.file);
+  const picKey = `/api/images/${filename}`;
+
   Post.create({
     title: req.body.title,
+    picKey: picKey,
     post_url: req.body.post_url,
-    post_image: req.fileStorage,
     user_id: req.session.user_id
   })
     .then(dbPostData => res.json(dbPostData))
@@ -104,6 +109,22 @@ router.post('/', upload.single("image"), withAuth, (req, res) => {
       console.log(err);
       res.status(500).json(err);
     });
+  
+  // let uploadPath;
+  // if(!req.files || Object.keys(req.files).length === 0) {
+  //   return res.status(400).send("No files were uploaded");
+  // }
+
+  // post_image = req.files.post_image;
+  // uploadPath = __dirname + '/public/images/' + 
+  // console.log(post_image);
+
+  // post_image.mv(uploadPath, function(err) {
+  //   if(err) return res.status(500).send(err);
+
+  //   res.send('File uploaded!');
+  // })
+  // console.log(req.file);
 });
 
 router.put('/upvote', withAuth, (req, res) => {
@@ -119,7 +140,9 @@ router.put('/upvote', withAuth, (req, res) => {
 router.put('/:id', withAuth, (req, res) => {
   Post.update(
     {
-      title: req.body.title
+      title: req.body.title,
+      post_url: req.body.post_url,
+      postImage: req.file.path
     },
     {
       where: {
