@@ -230,3 +230,46 @@ input[type="file"] {display: block;background-color: white;}
 label {font-weight: 600;}
 
 button.btn {background-color: deepskyblue;}
+
+img {size: 10px;}
+
+.post .title p {
+  display: none;
+}
+
+.title {
+  max-width: fit-content;
+}
+
+.card img {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-content: space-between;
+  justify-content: space-around;
+  align-items: flex-end;
+  object-fit: none;
+  width: 300px;
+  height: 300px;
+  max-inline-size: fit-content;
+}
+
+.title {
+  font-size: 35px;
+  line-height: normal;
+}
+
+.meta {line-height: normal;
+  width: min-content;
+  height: min-content;
+  text-align: center;
+}
+
+li.card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+  align-content: flex-start;
+}
