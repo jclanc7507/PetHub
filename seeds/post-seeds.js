@@ -4,7 +4,7 @@ const postdata = [
   {
     title: 'Donec posuere metus vitae ipsum.',
     post_url: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis doloribus nulla nihil illo temporibus ducimus impedit possimus.',
-    post_image: ('../public/images/1.png'),
+    post_image: ('../public/images/1.jpg'),
     user_id: 10
   },
   {
@@ -22,7 +22,7 @@ const postdata = [
   {
     title: 'Nunc purus.',
     post_url: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis doloribus nulla nihil illo temporibus ducimus impedit possimus.',
-    post_image: ('../public/images/4.png'),
+    post_image: ('../public/images/4.jpg'),
     user_id: 4
   },
   {
@@ -70,7 +70,7 @@ const postdata = [
   {
     title: 'Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo.',
     post_url: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis doloribus nulla nihil illo temporibus ducimus impedit possimus.',
-    post_image: ('../public/images/12.jpg'),
+    post_image: ('../public/images/12.png'),
     user_id: 10
   },
   {
@@ -101,7 +101,7 @@ const postdata = [
   {
     title: 'In hac habitasse platea dictumst.',
     post_url: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis doloribus nulla nihil illo temporibus ducimus impedit possimus.',
-    post_image: ('../public/images/17.jpg'),
+    post_image: ('../public/images/17.png'),
     user_id: 6
   },
   {
