@@ -1,8 +1,7 @@
 const router = require('express').Router();
+const sequelize = require('../../config/connection');
 const { Post, User, Comment, Vote } = require('../../models');
 const withAuth = require('../../utils/auth');
-
-
 
 // get all users
 router.get('/', (req, res) => {
@@ -10,6 +9,7 @@ router.get('/', (req, res) => {
   Post.findAll({
     attributes: [
       'id',
+      'post_url',
       'title',
       'created_at',
       [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
@@ -36,7 +36,6 @@ router.get('/', (req, res) => {
     });
 });
 
-// get individual user
 router.get('/:id', (req, res) => {
   Post.findOne({
     where: {
@@ -44,8 +43,8 @@ router.get('/:id', (req, res) => {
     },
     attributes: [
       'id',
+      'post_url',
       'title',
-      'description',
       'created_at',
       [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
     ],
@@ -77,7 +76,20 @@ router.get('/:id', (req, res) => {
     });
 });
 
-// updates post to add one upvote
+router.post('/', withAuth, (req, res) => {
+  // expects {title: 'Taskmaster goes public!', post_url: 'https://taskmaster.com/press', user_id: 1}
+  Post.create({
+    title: req.body.title,
+    post_url: req.body.post_url,
+    user_id: req.session.user_id
+  })
+    .then(dbPostData => res.json(dbPostData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
 router.put('/upvote', withAuth, (req, res) => {
   // custom static method created in models/Post.js
   Post.upvote({ ...req.body, user_id: req.session.user_id }, { Vote, Comment, User })
@@ -88,12 +100,10 @@ router.put('/upvote', withAuth, (req, res) => {
     });
 });
 
-// update/edit one post
-router.put('/:id'), withAuth, (req, res) => {
+router.put('/:id', withAuth, (req, res) => {
   Post.update(
     {
-      title: req.body.title,
-      description: req.body.description,
+      title: req.body.title
     },
     {
       where: {
@@ -112,42 +122,41 @@ router.put('/:id'), withAuth, (req, res) => {
       console.log(err);
       res.status(500).json(err);
     });
-};
+    
+});
 
-// create new post
-router.post('/'), withAuth, async (req, res) => {
-  try {
-    const newPost = await Post.create({
-      ...req.body,
-      user_id: req.session.user_id,
-      postImage: req.file.path
-    });
-
-    res.status(200).json(newPost);
-  } catch (err) {
-    res.status(400).json(err);
-  }
-};
-
-// delete existing post
-router.delete('/:id', withAuth, async (req, res) => {
-  try {
-    const postData = await Post.destroy({
-      where: {
-        id: req.params.id,
-        user_id: req.session.user_id,
-      },
-    });
-
-    if (!postData) {
-      res.status(404).json({ message: 'No post found with this id!' });
-      return;
+router.delete('/:id', withAuth, (req, res) => {
+  console.log('id', req.params.id);
+  Post.destroy({
+    where: {
+      id: req.params.id
     }
+  })
+    .then(dbPostData => {
+      if (!dbPostData) {
+        res.status(404).json({ message: 'No post found with this id' });
+        return;
+      }
+      res.json(dbPostData);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
 
-    res.status(200).json(postData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
+// routes to post static images
+router.get("/static", (req, res) => {
+    res.render("static");
+});
+
+// Route to display dynamic src images
+router.get("/dynamic", (req, res) => {
+  imageList = [];
+  imageList.push({ src: "../../public/images/Bob-flower-horn-fish.png", name: "Bob-flower-horn-fish" });
+  imageList.push({ src: "../../public/images/Boxer-dog.jpg", name: "boxer" });
+  imageList.push({ src: "../../public/images/Charlie-german-shepard.jpg", name: "german-shepard" });
+  res.render("dynamic", { imageList: imageList });
 });
 
 module.exports = router;
