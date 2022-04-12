@@ -1,6 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
-
 // create our Post model
 class Post extends Model {
   static upvote(body, models) {
@@ -14,9 +13,8 @@ class Post extends Model {
         },
         attributes: [
           'id',
-          'title',
           'post_url',
-          'post_image',          
+          'title',
           'created_at',
           [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
         ],
@@ -50,12 +48,7 @@ Post.init(
     },
     post_url: {
       type: DataTypes.STRING,
-      allowNull: true
-    },
-    post_image: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      default: ('../public/images/defaultPet.png')
+      allowNull: false
     },
     user_id: {
       type: DataTypes.INTEGER,
