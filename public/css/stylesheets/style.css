@@ -65,6 +65,7 @@ button:hover {
   flex-wrap: wrap;
   justify-content: center;
   flex-direction: row;
+  background-color: #799ecc;
 }
 
 textarea, input {
@@ -108,6 +109,13 @@ header {
   align-items: center;
   padding: 0 1%;
   color:#4d064d;
+
+}
+header img {
+  float: left;
+  width: 175px;
+  height: 175px;
+  background: #555;
 }
 
 header h1 {
@@ -235,10 +243,6 @@ img {size: 10px;}
   display: none;
 }
 
-.title {
-  max-width: fit-content;
-}
-
 .card img {
   display: flex;
   flex-wrap: wrap;
@@ -254,6 +258,7 @@ img {size: 10px;}
 .title {
   font-size: 35px;
   line-height: normal;
+  max-width: fit-content;
 }
 
 .meta {line-height: normal;
@@ -269,4 +274,51 @@ li.card {
   align-items: stretch;
   justify-content: flex-start;
   align-content: space-between;
+}
+span {
+  font-size: initial;
+  border-color: #4d064d;
+}
+
+text {
+  font-size: 16px;
+  display: block;
+  border-style: inset;
+  border-color: #4d064d;
+  text-indent: 20px;
+  margin: 0px;
+  padding: 10px;
+}
+
+a .title {
+  border-color: #4d064d;
+  background-color: white;
+  border-style: double;
+  display: block;
+  border-radius: 0px 0px 20px 20px;
+  margin: 0px;
+  padding: 10px;
+}
+
+img {
+  border-radius: 20px 20px 0px 0px;
+}
+
+.meta {
+  padding: 10px;
+  background-color: white;
+  border-color: black;
+  border-style: dotted;
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+}
+
+p.comments {
+  color: black;
+  font-weight: 500;
+  border-left-color: black;
+  border-left-style: dotted;
+  padding: 5px;
+  margin: 5px;
 }

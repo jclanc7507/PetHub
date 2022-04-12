@@ -1,8 +1,9 @@
 <article class="post">
-  <image rel="post_image" src="/public/images/default.png" alt="dog pic">
+  <image rel="post_image" src="{{post_image}}" alt="dog pic">
   <div class="title">
-    <a href="/post/{{post_url}}" target="_blank"></a>
-   <p>{{post.post_url}}</p>
+    <a class="title" href="/post/{{id}}" target="_blank">{{title}}</a>
+    <br />
+    <span>{{post_url}}</span>
   </div>
   <div class="meta">
     {{vote_count}} {{format_plural "point" vote_count}} by {{user.username}} on {{format_date created_at}}
