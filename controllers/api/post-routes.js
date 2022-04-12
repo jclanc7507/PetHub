@@ -109,22 +109,6 @@ router.post("/", upload.single("post_image"), async (req, res) => {
       console.log(err);
       res.status(500).json(err);
     });
-  
-  // let uploadPath;
-  // if(!req.files || Object.keys(req.files).length === 0) {
-  //   return res.status(400).send("No files were uploaded");
-  // }
-
-  // post_image = req.files.post_image;
-  // uploadPath = __dirname + '/public/images/' + 
-  // console.log(post_image);
-
-  // post_image.mv(uploadPath, function(err) {
-  //   if(err) return res.status(500).send(err);
-
-  //   res.send('File uploaded!');
-  // })
-  // console.log(req.file);
 });
 
 router.put('/upvote', withAuth, (req, res) => {
